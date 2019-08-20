@@ -2,6 +2,7 @@
  *  封装经常使用的元素
  *  用对象封装更加不容易出错
  * 
+ * tool.getZeroize()   补零
  * tool.getDate()  获取当前时间  返回值 2019-08-20 19:39:43
  * tool.getRandom()  返回(n,m)之间的随机整数
  * tool.getRgbColor()   返回RGB颜色
