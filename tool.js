@@ -14,14 +14,20 @@ var tool = {};
 /**
  * 获取当前时间  返回值 2019-08-20 19:39:43
  */
+/**
+ * 补零
+ */
+tool.getZeroize = function (num) {
+    return num < 10 ? "0" + num : num;
+}
 tool.getDate = function () {
     let date = new Date();
     let year = date.getFullYear();
-    let month = (date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
-    let day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
-    let hour = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
-    let minute = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
-    let second = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+    let month = tool.getZeroize(date.getMonth()+1);
+    let day = tool.getZeroize(date.getDate());
+    let hour = tool.getZeroize(date.getHours());
+    let minute = tool.getZeroize(date.getMinutes());
+    let second = tool.getZeroize(date.getSeconds());
     return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
 }
 /**
