@@ -7,7 +7,7 @@
  * tool.getRandom()  返回(n,m)之间的随机整数
  * tool.getRgbColor()   返回RGB颜色
  * tool.getRandomColor()   返回十六进制的随机颜色
- * 
+ * tool.getId()   根据时间戳和最大随机数获得一个字符串
  * 
  * 
  */
@@ -82,4 +82,13 @@ tool.getRandomColor = function () {
     let six = tool.getSixIndex(tool.getRandom(0, 15));
     let sixteen = String(one) + String(two) + String(three) + String(four) + String(five) + String(six);
     return "#" + sixteen;
+}
+
+/**
+ * 根据时间戳和最大随机数获得一个字符串
+*/
+tool.getId = function () {
+    let date = new Date();
+    let id = date.getTime();   // 获取1970年1月1日到目前为止的毫秒数 
+    return id = id + "" + this.getRandom(10000, 99999);
 }
