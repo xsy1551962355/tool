@@ -18,19 +18,44 @@
     <div class="box3"></div>
     <div class="box4"></div>
     <div class="box5"></div>
+    <div class="box6"></div>
 </body>
 <script src="./tool.js"></script>
 <script>
-    let box1 = document.querySelector(".box1");
-    let box2 = document.querySelector(".box2");
-    let box3 = document.querySelector(".box3");
-    let box4 = document.querySelector(".box4");
-    let box5 = document.querySelector(".box5");
-    box1.innerHTML = tool.getDate();
-    box2.innerHTML = tool.getRandom(10,100);
-    box3.style.backgroundColor = tool.getRgbColor();
-    box4.style.backgroundColor = tool.getRandomColor();
-    box5.innerHTML = tool.getId();
+
+    // let box1 = document.querySelector(".box1");
+    // let box2 = document.querySelector(".box2");
+    // let box3 = document.querySelector(".box3");
+    // let box4 = document.querySelector(".box4");
+    // let box5 = document.querySelector(".box5");
+    // let box6 = document.querySelector(".box6");
+    // box1.innerHTML = tool.getDate();
+    // box2.innerHTML = tool.getRandom(10,100);
+    // box3.style.backgroundColor = tool.getRgbColor();
+    // box4.style.backgroundColor = tool.getRandomColor();
+    // box5.innerHTML = tool.getId();
+
+    // let data = [{"name":"tom","gender":"男"}, { "name": "rose", "gender": "女" }];
+    // let str = JSON.stringify(data);
+    // localStorage.setItem("weibo",str)
+    // // 从localStorage里面根据指定的键(key)获取一个数组
+    // let x = tool.getLocalDataArray("weibo");
+    // box6.innerHTML = JSON.stringify(x);
+
+    // 存储一个数组在本地数据中
+    let arr = [
+        {id:"aaa",num:111},
+        {id:"bbb",num:222},
+        {id:"ccc",num:333}
+    ];
+    tool.saveLocalDataArray("sz",arr);
+    // // 追加数据到同一个键名中
+    let obj = { id: "ddd", num: 444 };
+    tool.appendDataIntoArray("sz", obj);
+    // // 删除对应id的数据
+    tool.deleteLocalDataById("sz", "bbb");
+    // // 根据id修改localStorage里面的指定键(key)的数组数据参数
+    tool.modifyLocalDataById("sz", "bbb","加油");
 </script>
 
 </html>

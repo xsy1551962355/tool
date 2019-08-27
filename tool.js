@@ -2,16 +2,21 @@
  *  封装经常使用的元素
  *  用对象封装更加不容易出错
  * 
- * tool.getZeroize()   补零
+ * tool.getZeroize(num)   补零
  * tool.getDate()  获取当前时间  返回值 2019-08-20 19:39:43
- * tool.getRandom()  返回(n,m)之间的随机整数
+ * tool.getRandom(n,m)  返回(n,m)之间的随机整数
  * tool.getRgbColor()   返回RGB颜色
  * tool.getRandomColor()   返回十六进制的随机颜色
  * tool.getId()   根据时间戳和最大随机数获得一个字符串
- * 
+ * tool.getLocalDataArray(key)   从localStorage里面根据指定的键(key)获取一个数组
+ * tool.saveLocalDataArray(key,obj)   存储一个数据在本地存储中
+ * tool.appendDataIntoArray(key,obj)  向localStorage里面指定键(key)的数组数据追加一个数据对象（data）参数
+ * tool.deleteLocalDataById(key,id)  根据对应的id从localStorage中指定键(key)的数组中删除一条数据参数
+ * tool.modifyLocalDataById(key,id,data)  根据id修改localStorage里面的指定键(key)的数组数据参数
  * 
  */
 var tool = {};
+
 /**
  * 获取当前时间  返回值 2019-08-20 19:39:43
  */
@@ -31,12 +36,14 @@ tool.getDate = function () {
     let second = tool.getZeroize(date.getSeconds());
     return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
 }
+
 /**
  * 获取随机数   (n,m)之间的随机整数
  */
 tool.getRandom = function (n,m) {
     return Math.floor(Math.random() * (m - n + 1) + n);
 }
+
 /**
  * 获取随机rgb颜色
  */
@@ -46,6 +53,7 @@ tool.getRgbColor = function () {
     let b = tool.getRandom(0, 255);
     return "rgb(" + r + "," + g + "," + b +")";
 }
+
 /**
  * 获取随机十六进制的颜色  0-9 a-f   #123456
  */
@@ -91,4 +99,60 @@ tool.getId = function () {
     let date = new Date();
     let id = date.getTime();   // 获取1970年1月1日到目前为止的毫秒数 
     return id = id + "" + this.getRandom(10000, 99999);
+}
+
+/**
+ * 从localStorage里面根据指定的键(key)获取一个数组
+ * key 为本地数据的键名
+ */
+tool.getLocalDataArray = function (key) {
+    let str = localStorage.getItem(key);//获取本地数据中的字符串
+    let arr = JSON.parse(str);// 把字符串转换成数组
+    return arr || [];
+}
+
+/**
+ * 存储一个数据在本地存储中
+ */
+tool.saveLocalDataArray = function (key,obj) {
+    let arr = JSON.stringify(obj);
+    localStorage.setItem(key, arr);
+}
+
+/**
+ * 向localStorage里面指定键(key)的数组数据追加一个数据对象（data）参数
+ */
+tool.appendDataIntoArray = function (key, obj) {
+    let oldArr = tool.getLocalDataArray(key);
+    oldArr.push(obj);
+    arr = JSON.stringify(oldArr);
+    localStorage.setItem(key, arr);
+}
+
+/**
+ * 根据对应的id从localStorage中指定键(key)的数组中删除一条数据参数
+ */
+tool.deleteLocalDataById = function (key, id) {
+    let oldArr = tool.getLocalDataArray(key);
+    oldArr.forEach((e, i) => {
+        if (e.id === id) {
+            oldArr.splice(i, 1);
+            return;
+        }
+    })
+    tool.saveLocalDataArray(key,oldArr);
+}
+
+/**
+ * 根据id修改localStorage里面的指定键(key)的数组数据参数
+ */
+tool.modifyLocalDataById = function (key, id,data) {
+    let oldArr = tool.getLocalDataArray(key);
+    oldArr.forEach((e, i) => {
+        if (e.id === id) {
+            e.id = data;
+            return;
+        }
+    })
+    tool.saveLocalDataArray(key, oldArr);
 }
