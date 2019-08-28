@@ -133,21 +133,24 @@ tool.appendDataIntoArray = function (key, obj) {
  * 根据对应的id从localStorage中指定键(key)的数组中删除一条数据参数
  */
 tool.deleteLocalDataById = function (key, id) {
-    let oldArr = tool.getLocalDataArray(key);
+    // let oldArr = tool.getLocalDataArray(key);
+    let oldArr = this.getLocalDataArray(key);
     oldArr.forEach((e, i) => {
         if (e.id === id) {
             oldArr.splice(i, 1);
             return;
         }
     })
-    tool.saveLocalDataArray(key,oldArr);
+    // tool.saveLocalDataArray(key, oldArr);
+    this.saveLocalDataArray(key, oldArr);
 }
 
 /**
  * 根据id修改localStorage里面的指定键(key)的数组数据参数
  */
 tool.modifyLocalDataById = function (key, id,data) {
-    let oldArr = tool.getLocalDataArray(key);
+    // let oldArr = tool.getLocalDataArray(key);
+    let oldArr = this.getLocalDataArray(key);
     let flag = false;
     oldArr.forEach((e, i) => {
         if (e.id === id) {
@@ -156,6 +159,7 @@ tool.modifyLocalDataById = function (key, id,data) {
             return;
         }
     })
-    tool.saveLocalDataArray(key, oldArr);
+    // tool.saveLocalDataArray(key, oldArr);
+    this.saveLocalDataArray(key, oldArr);
     return flag;
 }
