@@ -148,11 +148,14 @@ tool.deleteLocalDataById = function (key, id) {
  */
 tool.modifyLocalDataById = function (key, id,data) {
     let oldArr = tool.getLocalDataArray(key);
+    let flag = false;
     oldArr.forEach((e, i) => {
         if (e.id === id) {
-            e.id = data;
+            oldArr[i] = data;
+            flag = true;
             return;
         }
     })
     tool.saveLocalDataArray(key, oldArr);
+    return flag;
 }

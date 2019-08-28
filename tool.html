@@ -55,7 +55,10 @@
     // // 删除对应id的数据
     tool.deleteLocalDataById("sz", "bbb");
     // // 根据id修改localStorage里面的指定键(key)的数组数据参数
-    tool.modifyLocalDataById("sz", "ccc","加油");
+    let isFlag = tool.modifyLocalDataById("sz", "ccc", { id: "ccc", num: 999 });
+    if(isFlag){
+        alert("修改数据成功");
+    }
 </script>
 
 </html>
